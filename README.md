@@ -1,2 +1,2 @@
-# -SmlpeVodaCampPart3
+# SmlpeVodaCampPart3
 E-commerce for Shoes
