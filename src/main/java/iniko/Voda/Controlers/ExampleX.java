@@ -1,7 +1,6 @@
 package iniko.Voda.Controlers;
 
 
-import iniko.Voda.DTO.StarterElent;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 @Controller
 public class ExampleX {
 
-    @RequestMapping("/ex")
+/*    @RequestMapping("/ex")
     public @ResponseBody Iterable<StarterElent> Getit()
     {
         ArrayList<StarterElent> list =new ArrayList<>();
@@ -22,7 +21,7 @@ public class ExampleX {
 
 
         return list;
-    }
+    }*/
     @RequestMapping("/index")
     public String Getit(Model model)
     {
