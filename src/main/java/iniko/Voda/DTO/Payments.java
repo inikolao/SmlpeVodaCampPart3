@@ -14,7 +14,7 @@ public class Payments {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int PayId;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private User User;
     private PaymentType Type;
     private Date DatePayment;

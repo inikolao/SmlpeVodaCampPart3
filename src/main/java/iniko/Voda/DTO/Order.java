@@ -15,13 +15,13 @@ public class Order {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int OrderID;
     @OneToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private User UserCreated;
     @OneToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private OrderCategory Category;
     @OneToMany
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private List<Product> Products;
     private long Total;
     private int NumProducts;

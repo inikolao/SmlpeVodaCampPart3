@@ -13,10 +13,10 @@ public class ShoppingCard {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int SpID;
     @OneToMany
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private List<Product> products;
     @OneToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private User UserRelated;
     private long Total;
     private int NumProd;

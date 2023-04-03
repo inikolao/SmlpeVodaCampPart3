@@ -19,7 +19,7 @@ public class User {
     private String Surname;
     private String Mobile;
     @OneToMany
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private List<Order> Orders;
     private Boolean IsAdmin;
     private Boolean IsActive;

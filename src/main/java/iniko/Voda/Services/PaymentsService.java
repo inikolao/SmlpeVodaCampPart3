@@ -11,7 +11,7 @@ public class PaymentsService {
     @Autowired
     private PaymentsRepo paymentsRepo;
 
-    private void CreatePayment(Payments payments)
+    public void CreatePayment(Payments payments)
     {
         paymentsRepo.save(payments);
     }

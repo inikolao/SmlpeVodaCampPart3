@@ -14,7 +14,7 @@ public class UserHistory {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int UserHID;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private User User;
     private String Action;
     private Date ActionDate;

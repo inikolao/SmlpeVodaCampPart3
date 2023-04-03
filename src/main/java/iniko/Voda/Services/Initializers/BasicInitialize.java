@@ -2,14 +2,13 @@ package iniko.Voda.Services.Initializers;
 
 import iniko.Voda.DTO.*;
 import iniko.Voda.Services.*;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.SessionTrackingMode;
 import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 @Component
 public class BasicInitialize {
@@ -84,7 +83,7 @@ public class BasicInitialize {
     {
         File file;
         for (int i = 1; i < Num; i++) {
-            file=new File(i,GenRandomString(),GenRandomString(),GetNow(),fileTypeService.GetFileTypeByID(i));
+            file=new File(i,GenRandomString(),GenRandomString(),GetNow(),fileTypeService.GetFileTypeByID(GenRandomInt()+1));
             fileService.CreateFile(file);
         }
     }
@@ -94,13 +93,18 @@ public class BasicInitialize {
         Product product;
         for (int i = 0; i < 100; i++) {
             product=new Product();
-            product.setCategory(productCategoryService.GetProductCategoryByID(9));
+            ProductCategory category=productCategoryService.GetProductCategoryByID(GenRandomInt()+1);
+            product.setCategory(category);
             product.setDescription(GenRandomString());
             //product.setType(productTypeService.GetProductTypeByID(GenRandomInt()+1));
-            product.setType(productTypeService.GetProductTypeByID(5));
+            ProductType productType=productTypeService.GetProductTypeByID(GenRandomInt()+1);
+            product.setType(productType);
             product.setName(GenRandomString());
             product.setDateAdded(GetNow());
-            product.setFilesRelated(fileService.GetNumFiles(5));
+            List<File> files=fileService.GetAllFiles();
+            List<File> fileList = new ArrayList<>();
+            fileList.add(files.get(i));
+            product.setFilesRelated(fileList);
             product.setPrice(GenRandomPrice());
             product.setRating(GenRandomInt());
             productService.CreateProduct(product);
@@ -109,6 +113,8 @@ public class BasicInitialize {
     }
     public void InitializeUsers()
     {
+        createAdmin();
+        createMainTest();
         User user;
         for (int i = 0; i < 10; i++) {
             user=new User();
@@ -123,6 +129,34 @@ public class BasicInitialize {
             user.setLastLogIn(null);
             userService.CreateUser(user);
         }
+    }
+    private void createAdmin()
+    {
+        User admin=new User();
+        admin.setUsername("admin");
+        admin.setPassword("sa");
+        admin.setAdmin(true);
+        admin.setActive(true);
+        admin.setMobile("012345678910");
+        admin.setDateCreated(GetNow());
+        admin.setName(GenRandomString());
+        admin.setSurname(GenRandomString());
+        admin.setLastLogIn(null);
+        userService.CreateUser(admin);
+    }
+    private void createMainTest()
+    {
+        User test=new User();
+        test.setUsername("user");
+        test.setPassword("sa");
+        test.setAdmin(false);
+        test.setActive(true);
+        test.setMobile("012345678910");
+        test.setDateCreated(GetNow());
+        test.setName(GenRandomString());
+        test.setSurname(GenRandomString());
+        test.setLastLogIn(null);
+        userService.CreateUser(test);
     }
     /*private List<Object> SetObjectsNum(Object obj, Class obj.Class, int Interations)
     {

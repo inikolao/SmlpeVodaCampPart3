@@ -18,16 +18,16 @@ public class Product {
     private String Name;
     private String Description;
     @OneToMany
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private List<File> FilesRelated;
     private long Price;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private ProductCategory Category;
     private int Rating;
     private Date DateAdded;
     @ManyToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private ProductType Type;
 
     public Product() {

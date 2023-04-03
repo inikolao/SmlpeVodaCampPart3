@@ -17,7 +17,7 @@ public class File {
     private String FileLocation;
     private Date DateCreated;
     @OneToOne
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     private FileType fileType;
 
     public File() {
