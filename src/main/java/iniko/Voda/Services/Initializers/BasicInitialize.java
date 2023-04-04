@@ -1,12 +1,10 @@
 package iniko.Voda.Services.Initializers;
 
 import iniko.Voda.DTO.*;
-import iniko.Voda.Services.*;
-import org.hibernate.Session;
+import iniko.Voda.Services.DB.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.SessionTrackingMode;
 import java.time.Instant;
 import java.util.*;
 

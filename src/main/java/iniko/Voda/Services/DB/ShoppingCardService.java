@@ -1,4 +1,4 @@
-package iniko.Voda.Services;
+package iniko.Voda.Services.DB;
 
 import iniko.Voda.DTO.ShoppingCard;
 import iniko.Voda.Repos.ShoppingCardRepo;
