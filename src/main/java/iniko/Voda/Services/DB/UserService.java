@@ -17,4 +17,16 @@ public class UserService{
     {
         userRepo.save(user);
     }
+
+    public User findByUsername(String username) {
+        return userRepo.findByUsername(username);
+    }
+
+    public User save(User user) {
+        return userRepo.save(user);
+    }
+
+    public User findAdmin() {
+        return userRepo.findByIsAdminTrue();
+    }
 }

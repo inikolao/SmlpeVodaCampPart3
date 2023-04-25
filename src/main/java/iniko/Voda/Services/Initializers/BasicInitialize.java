@@ -3,6 +3,7 @@ package iniko.Voda.Services.Initializers;
 import iniko.Voda.DTO.*;
 import iniko.Voda.Services.DB.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -117,7 +118,8 @@ public class BasicInitialize {
         for (int i = 0; i < 10; i++) {
             user=new User();
             user.setUsername(GenRandomString()+"_TEST");
-            user.setPassword("SR"+GenRandomString());
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            user.setPassword(passwordEncoder.encode("SR"+GenRandomString()));
             user.setAdmin(false);
             user.setActive(true);
             user.setMobile("012345678910");
@@ -132,7 +134,8 @@ public class BasicInitialize {
     {
         User admin=new User();
         admin.setUsername("admin");
-        admin.setPassword("sa");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        admin.setPassword(passwordEncoder.encode("sa"));
         admin.setAdmin(true);
         admin.setActive(true);
         admin.setMobile("012345678910");
@@ -146,7 +149,8 @@ public class BasicInitialize {
     {
         User test=new User();
         test.setUsername("user");
-        test.setPassword("sa");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        test.setPassword(passwordEncoder.encode("sa"));
         test.setAdmin(false);
         test.setActive(true);
         test.setMobile("012345678910");

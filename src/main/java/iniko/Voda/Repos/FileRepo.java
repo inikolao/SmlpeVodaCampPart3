@@ -1,7 +1,7 @@
 package iniko.Voda.Repos;
 
 import iniko.Voda.DTO.File;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface FileRepo extends CrudRepository<File,Integer> {
+public interface FileRepo extends JpaRepository<File,Integer> {
 }

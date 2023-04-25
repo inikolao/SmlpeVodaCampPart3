@@ -1,7 +1,7 @@
 package iniko.Voda.Repos;
 
 import iniko.Voda.DTO.UserHistory;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface HistoryRepo extends CrudRepository<UserHistory,Integer> {
+public interface HistoryRepo extends JpaRepository<UserHistory,Integer> {
 }
