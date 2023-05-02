@@ -1,4 +1,4 @@
-package iniko.Voda.Controlers.App.pages.ErrorPages;
+package iniko.Voda.Controlers.Pages.ErrorPages;
 
 
 import org.springframework.data.crossstore.ChangeSetPersister;

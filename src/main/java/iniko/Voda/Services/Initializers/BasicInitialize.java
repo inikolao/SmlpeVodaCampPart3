@@ -1,6 +1,7 @@
 package iniko.Voda.Services.Initializers;
 
 import iniko.Voda.DTO.*;
+import iniko.Voda.DTO.Enums.ProductTypeS;
 import iniko.Voda.Services.DB.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -49,7 +50,7 @@ public class BasicInitialize {
         ProductType productType;
         for (int i = 0; i < Num; i++) {
             productType=new ProductType();
-            productType.setType(GenRandomString());
+            productType.setType(GenProductType());
             productTypeService.CreateProductType(productType);
         }
     }
@@ -179,6 +180,27 @@ public class BasicInitialize {
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString());
+    }
+
+    private String GenProductType()
+    {
+        Random rand = new Random();
+
+        int upperbound = 4;
+        int getnum=rand.nextInt(upperbound);
+
+        switch (getnum){
+            case 0:
+                return ProductTypeS.Men.toString();
+            case 1:
+                return ProductTypeS.Women.toString();
+            case 2:
+                return ProductTypeS.Kids.toString();
+            case 3:
+                return ProductTypeS.Special.toString();
+            default:
+                return "fallen";
+        }
     }
 
     private Integer GenRandomInt()

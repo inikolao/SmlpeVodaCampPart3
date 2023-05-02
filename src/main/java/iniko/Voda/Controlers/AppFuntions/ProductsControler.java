@@ -1,4 +1,4 @@
-package iniko.Voda.Controlers.App;
+package iniko.Voda.Controlers.AppFuntions;
 
 import iniko.Voda.Services.DB.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,7 @@ public class ProductsControler {
         model.addAttribute("products",productService.GetAllProducts());
         return "products";
     }
+
 
     @RequestMapping("/search")
     public String GetProducts(Model model,String keyword)

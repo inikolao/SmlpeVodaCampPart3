@@ -1,4 +1,4 @@
-package iniko.Voda.Controlers.App.User;
+package iniko.Voda.Controlers.User;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;

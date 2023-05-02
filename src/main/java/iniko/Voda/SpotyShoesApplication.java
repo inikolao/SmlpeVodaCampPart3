@@ -1,5 +1,6 @@
 package iniko.Voda;
 
+import iniko.Voda.AppConfig.Session.SessionCleaner;
 import iniko.Voda.Services.Initializers.BasicInitialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -19,13 +20,18 @@ public class SpotyShoesApplication {
     @Bean
     public void setUp() {
         //BasicInitialize initialize=new BasicInitialize(20,15,15,30,40);
-        initialize.InitializeProductType(7);
-        initialize.InitializeProductCategory(11);
-        initialize.InitializeOrderCategory(11);
-        initialize.InitializeFileType(10);
-        initialize.InitializeFile(101);
-        initialize.InitializeProducts();
-        initialize.InitializeUsers();
+
+
+        //initialize.InitializeProductType(7);
+       // initialize.InitializeProductCategory(11);
+       // initialize.InitializeOrderCategory(11);
+       // initialize.InitializeFileType(10);
+      // initialize.InitializeFile(101);
+       // initialize.InitializeProducts();
+      //  initialize.InitializeUsers();
     }
+
+
+
 
 }

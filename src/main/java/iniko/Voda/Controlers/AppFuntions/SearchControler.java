@@ -1,4 +1,4 @@
-package iniko.Voda.Controlers.App.pages;
+package iniko.Voda.Controlers.AppFuntions;
 
 
 import org.springframework.stereotype.Controller;

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:include="topdown/aheader.html"></div>
+<body>
+<h1>User List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Last Log In</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.getUserID()}"></td>
+    <td th:text="${user.getUsername()}"></td>
+    <td th:text="${user.getLastLogIn()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

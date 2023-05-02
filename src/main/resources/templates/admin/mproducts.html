@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:include="topdown/aheader.html"></div>
+<body>
+<h1>Product Managment List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Type</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="product:${mproducts}">
+    <td th:text="${product.getProd_ID()}"></td>
+    <td th:text="${product.getName()}"></td>
+    <td th:text="${product.getCategory().getName()}"></td>
+    <td th:text="${product.getType().getType()}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

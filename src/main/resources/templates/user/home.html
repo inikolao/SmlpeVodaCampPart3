@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Home</title>
-</head>
+<div th:include="topdown/header.html"></div>
 <body>
 <h1>Welcome <span th:text="${username}">User</span> to the User panel!</h1>
 <p><a th:href="@{/logout}">Logout</a></p>
+<div th:include="topdown/ufooter.html"></div>
 </body>
 </html>
