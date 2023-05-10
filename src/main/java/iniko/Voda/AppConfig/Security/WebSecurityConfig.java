@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login", "/logout","/index","/search").permitAll()
+                .antMatchers("/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
@@ -85,11 +85,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
+            session.setAttribute("userlog",false);
             session.setAttribute("isAdmin", user.getAdmin());
             Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
             if (roles.contains("ROLE_ADMIN")) {
                 response.sendRedirect("/admin/dashboard");
             } else if (roles.contains("ROLE_USER")) {
+                session.setAttribute("userlog",true);
                 response.sendRedirect("/user/home");
             } else {
                 throw new IllegalStateException("User has no valid roles");

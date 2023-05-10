@@ -29,13 +29,16 @@
             <li th:if="${session.isEmpty()}" class="nav-item">
                 <a class="nav-link" th:href="@{/login}">Login</a>
             </li>
-            <li th:if="${session.containsKey('username')}" class="nav-item"><a class="nav-link" th:href="@{user/home}">User Panel</a></li>
 
-            <li th:if="${session.containsKey('isAdmin')}" class="nav-item" >
+        </ul>
+        <ul class="navbar-nav">
+            <li th:if="${#session.getAttribute('userlog')}" class="nav-item"><a class="nav-link" th:href="@{user/home}">User Panel</a></li>
+
+            <li th:if="${session.isAdmin}" class="nav-item" >
                 <a class="nav-link" th:href="@{admin/dashboard}">Admin Panel</a></li>
         </ul>
 
-        <ul class="navbar-nav d-flex">
+        <ul th:unless="${session.isEmpty()}" class="navbar-nav d-flex">
             <li class="nav-link" >
                 <a class="nav-link" th:href="@{/logout}">Log out</a></li>
         </ul>

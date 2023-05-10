@@ -32,6 +32,10 @@ public class ShoppingCard {
         NumProd = numProd;
     }
 
+    public ShoppingCard(User userRelated) {
+        this.products = products;
+    }
+
     public int getSpID() {
         return SpID;
     }

@@ -14,7 +14,7 @@
   </thead>
   <tbody>
   <tr th:each="product:${mproducts}">
-    <td th:text="${product.getProd_ID()}"></td>
+    <td th:text="${product.getId()}"></td>
     <td th:text="${product.getName()}"></td>
     <td th:text="${product.getCategory().getName()}"></td>
     <td th:text="${product.getType().getType()}"></td>

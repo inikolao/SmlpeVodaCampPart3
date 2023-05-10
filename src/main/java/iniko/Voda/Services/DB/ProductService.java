@@ -25,6 +25,10 @@ public class ProductService {
         productRepo.findAll().forEach(products::add);
         return products;
     }
+    public Product findProductByProd_ID(int ID)
+    {
+      return productRepo.getProductById(ID);
+    }
     public List<Product> GetProductsByName(String keyword)
     {
         List<Product> products=new ArrayList<>();
@@ -41,4 +45,5 @@ public class ProductService {
         }
         return productsr;
     }
+
 }

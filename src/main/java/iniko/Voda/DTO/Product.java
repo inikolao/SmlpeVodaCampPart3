@@ -14,7 +14,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int Prod_ID;
+    private int id;
     private String Name;
     private String Description;
     @OneToMany
@@ -34,7 +34,7 @@ public class Product {
     }
 
     public Product(int prod_ID, String name, String description, List<File> filesRelated, long price, ProductCategory category, int rating, Date dateAdded, ProductType type) {
-        Prod_ID = prod_ID;
+        id = prod_ID;
         Name = name;
         Description = description;
         FilesRelated = filesRelated;
@@ -45,12 +45,12 @@ public class Product {
         Type = type;
     }
 
-    public int getProd_ID() {
-        return Prod_ID;
+    public int getId() {
+        return id;
     }
 
-    public void setProd_ID(int prod_ID) {
-        Prod_ID = prod_ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -120,7 +120,7 @@ public class Product {
     @Override
     public String toString() {
         return "Product{" +
-                "Prod_ID=" + Prod_ID +
+                "Prod_ID=" + id +
                 ", Name='" + Name + '\'' +
                 ", Description='" + Description + '\'' +
                 ", FilesRelated=" + FilesRelated +

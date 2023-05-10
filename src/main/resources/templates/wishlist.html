@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:include="topdown/header.html"></div>
+<body>
+
+<div class="container">
+  <h1>My Wishlist</h1>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+      <td th:text="${item.name}"></td>
+      <td th:text="${item.description}"></td>
+      <td th:text="${item.price}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+<div th:include="topdown/footer.html"></div>
+</body>
+</html>
