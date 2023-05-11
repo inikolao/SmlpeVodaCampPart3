@@ -12,54 +12,23 @@
 <!-- Products Section -->
 <section class="container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" th:each="product:${productsint}">
             <div class="card mb-4 shadow-sm">
                 <img th:src="@{../data/images/item-1.jpg}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Product 1</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h5 class="card-title" th:text="${product.getName()}"></h5>
+                    <p class="card-text" th:text="${product.getDescription()}"></p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a th:href="@{/cart/add}" class="btn btn-sm btn-outline-secondary">Add to Cart</a>
-                            <a th:href="@{/whishlist/add}" class="btn btn-sm btn-outline-secondary">Add to Wishlist</a>
+                            <a th:href="@{/cart/add}" data-id="${product.id}" class="btn btn-sm btn-outline-secondary">Add to Cart</a>
+                            <a href="#" th:onclick="|addtoWlist('${product.getId()}')|" class="btn btn-sm btn-outline-secondary add-to-wlist">Add to Wishlist</a>
                         </div>
-                        <small class="text-muted">$50</small>
+                        <small class="text-muted" th:text="${product.getPrice()}">$50</small>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img th:src="@{../data/images/item-2.jpg}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Product 2</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a th:href="@{/cart/add}" class="btn btn-sm btn-outline-secondary">Add to Cart</a>
-                            <a th:href="@{/whishlist/add}" class="btn btn-sm btn-outline-secondary">Add to Wishlist</a>
-                        </div>
-                        <small class="text-muted">$75</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img th:src="@{../data/images/item-3.jpg}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Product 3</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a th:href="@{/cart/add}" class="btn btn-sm btn-outline-secondary">Add to Cart</a>
-                            <a th:href="@{/whishlist/add}" class="btn btn-sm btn-outline-secondary">Add to Wishlist</a>
-                        </div>
-                        <small class="text-muted">$100</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </section>
 

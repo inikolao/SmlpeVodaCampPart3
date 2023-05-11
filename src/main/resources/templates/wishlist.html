@@ -15,10 +15,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="item : ${items}">
-      <td th:text="${item.name}"></td>
-      <td th:text="${item.description}"></td>
-      <td th:text="${item.price}"></td>
+    <tr th:each="product:${wproducts}">
+      <td th:text="${product.getName()}"></td>
+      <td th:text="${product.getDescription()}"></td>
+      <td th:text="${product.getPrice()}"></td>
+      <td><button type="button" th:onclick="|removetoWlist('${product.getId()}')|" class="btn btn-secondary btn-sm">remove</button></td>
     </tr>
     </tbody>
   </table>

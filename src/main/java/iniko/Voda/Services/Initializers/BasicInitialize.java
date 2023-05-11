@@ -30,6 +30,9 @@ public class BasicInitialize {
     @Autowired
     private FileTypeService fileTypeService;
 
+    @Autowired
+    private WishListService wishListService;
+
     public BasicInitialize() {
 
     }
@@ -129,6 +132,7 @@ public class BasicInitialize {
             user.setSurname(GenRandomString());
             user.setLastLogIn(null);
             userService.CreateUser(user);
+            wishListService.CreateWhishList(user);
         }
     }
     private void createAdmin()
@@ -160,6 +164,7 @@ public class BasicInitialize {
         test.setSurname(GenRandomString());
         test.setLastLogIn(null);
         userService.CreateUser(test);
+        wishListService.CreateWhishList(test);
     }
     /*private List<Object> SetObjectsNum(Object obj, Class obj.Class, int Interations)
     {
