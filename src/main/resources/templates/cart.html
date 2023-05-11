@@ -3,6 +3,27 @@
 <div th:include="topdown/header.html"></div>
 <body>
 <h1>My Shopping Card</h1>
+<div class="container">
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product:${sCardProducts}">
+            <td th:text="${product.getName()}"></td>
+            <td th:text="${product.getDescription()}"></td>
+            <td th:text="${product.getPrice()}"></td>
+            <td><button type="button" th:onclick="|removeFromCart('${product.getId()}')|" class="btn btn-secondary btn-sm">remove</button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
 <div th:include="topdown/footer.html"></div>
 </body>
 </html>

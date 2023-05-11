@@ -41,7 +41,7 @@ public class WishListControler {
             if (product != null) {
                 whishlist.add(product);
                 session.setAttribute("wproducts",whishlist);
-                return "Product added to cart";
+                return "Product added to wishlist";
             } else {
                 return "Product not found";
             }
@@ -74,7 +74,7 @@ public class WishListControler {
 
                 whishlist.remove(fx.get(0));
                 session.setAttribute("wproducts",whishlist);
-                return "Product removed to cart";
+                return "Product removed from wishlist";
             } else {
                 return "Product not found";
             }

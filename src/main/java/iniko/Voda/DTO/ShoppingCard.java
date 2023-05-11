@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,7 +34,10 @@ public class ShoppingCard {
     }
 
     public ShoppingCard(User userRelated) {
-        this.products = products;
+        this.UserRelated=userRelated;
+        this.products = new ArrayList<>();
+        this.Total=0;
+        this.NumProd=0;
     }
 
     public int getSpID() {
