@@ -27,6 +27,9 @@
                 <a class="nav-link" th:href="@{/wishlist}">Wishlist <span th:text="${session.wprSize}">[]</span></a>
             </li>
             <li th:if="${session.username==null}" th:unless="${session.isAdmin!=null}" class="nav-item">
+                <a class="nav-link" th:href="@{/register}">Register</a>
+            </li>
+            <li th:if="${session.username==null}" th:unless="${session.isAdmin!=null}" class="nav-item">
                 <a class="nav-link" th:href="@{/login}">Login</a>
             </li>
 
