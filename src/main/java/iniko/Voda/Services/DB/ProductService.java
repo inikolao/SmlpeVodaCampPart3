@@ -56,6 +56,11 @@ public class ProductService {
         Page<Product> pageResult = productRepo.findAll(pageable);
         return pageResult;
     }
+    public Page<Product> findProductsByName(String search,int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        Page<Product> pageResult = productRepo.findAllByNameContainingIgnoreCase(search,pageable);
+        return pageResult;
+    }
 
 
 }

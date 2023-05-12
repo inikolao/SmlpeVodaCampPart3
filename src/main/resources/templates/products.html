@@ -10,10 +10,10 @@
                     Search
                 </div>
                 <div class="card-body">
-                    <form  id="searchForm" th:action="@{/}" method="post">
+                    <form  id="searchForm" th:action="@{'#'}" method="post">
                         <div class="form-group">
                             <label for="search">Search</label>
-                            <input type="text" class="form-control" id="search" placeholder="Enter search term">
+                            <input type="text" class="form-control" id="search" name="search" placeholder="Enter search term" th:onkeyup="|getmyprods();|">
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-9">
             <h1>Products</h1>
-            <div class="row">
+            <div class="row" id="searchResults">
                 <div class="col-md-4" th:each="product:${products}">
                     <div class="card mb-4 shadow-sm">
                         <img th:src="${product.getFilesRelated().get(0).getFileLocation()}" class="card-img-top" alt="...">

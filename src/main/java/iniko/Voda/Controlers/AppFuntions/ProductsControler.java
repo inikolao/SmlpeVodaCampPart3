@@ -40,7 +40,7 @@ public class ProductsControler {
     }
 
 
-    @RequestMapping("/search")
+    @RequestMapping("/searchp")
     public String GetProducts(Model model,String keyword)
     {
         model.addAttribute("products",productService.GetProductsByName(keyword));

@@ -71,3 +71,26 @@ function removetoWlist(productId) {
     $(".table").load(location.href + " .table");
     $("#navbarNav").load(location.href + " #navbarNav");
 }
+
+function getmyprods() {
+    var input = $('#search').val();
+    if (input.length >= 2) {
+        $.ajax({
+            type: "POST",
+            url: "/search/name",
+            contentType: "application/json",
+            data: JSON.stringify({
+                search: input
+            }),
+            success: function(result) {
+                var value1 = result['products'];
+                var value2 = result['totalPages'];
+                var value3 = result['page'];
+                $('#searchResults').load(location.href + " #searchResults");
+            },
+            error: function(xhr, status, error) {
+                console.log("Error responding: " + error);
+            }
+        });
+    }
+}

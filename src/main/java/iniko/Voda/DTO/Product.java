@@ -15,7 +15,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    private String Name;
+
+    private String name;
     private String Description;
     @OneToMany
     @Cascade(CascadeType.DELETE)
@@ -35,7 +36,7 @@ public class Product {
 
     public Product(int prod_ID, String name, String description, List<File> filesRelated, long price, ProductCategory category, int rating, Date dateAdded, ProductType type) {
         id = prod_ID;
-        Name = name;
+        this.name = name;
         Description = description;
         FilesRelated = filesRelated;
         Price = price;
@@ -54,11 +55,11 @@ public class Product {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDescription() {
@@ -121,7 +122,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "Prod_ID=" + id +
-                ", Name='" + Name + '\'' +
+                ", Name='" + name + '\'' +
                 ", Description='" + Description + '\'' +
                 ", FilesRelated=" + FilesRelated +
                 ", Price=" + Price +
