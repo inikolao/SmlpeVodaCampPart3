@@ -34,13 +34,18 @@ public class WishListControler {
     public String addToWishlist(@RequestBody Map<String, Object> payload, HttpSession session) {
         int productId = Integer.parseInt(payload.get("productId").toString());
         Product product=productService.findProductByProd_ID(productId);
+        long total=0;
 
 
         if(session.getAttribute("userlog")== null)
         {
             if (product != null) {
+               //
                 whishlist.add(product);
+                total= whishlist.stream().mapToLong(Product::getPrice).sum();
                 session.setAttribute("wproducts",whishlist);
+                session.setAttribute("wsum",total);
+                session.setAttribute("wprSize",whishlist.size());
                 return "Product added to wishlist";
             } else {
                 return "Product not found";
@@ -65,7 +70,7 @@ public class WishListControler {
     public String removeToWishlist(@RequestBody Map<String, Object> payload, HttpSession session) {
         int productId = Integer.parseInt(payload.get("productId").toString());
         whishlist= (List<Product>) session.getAttribute("wproducts");
-
+        long total= (long) session.getAttribute("wsum");
 
         if(session.getAttribute("userlog")== null)
         {
@@ -73,7 +78,10 @@ public class WishListControler {
                List <Product> fx= whishlist.stream().filter(productsx -> productId==productsx.getId()).collect(Collectors.toList());
 
                 whishlist.remove(fx.get(0));
+                total= total-fx.get(0).getPrice();
                 session.setAttribute("wproducts",whishlist);
+                session.setAttribute("wsum",total);
+                session.setAttribute("wprSize",whishlist.size());
                 return "Product removed from wishlist";
             } else {
                 return "Product not found";

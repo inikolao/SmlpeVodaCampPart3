@@ -3,6 +3,10 @@ package iniko.Voda.Services.DB;
 import iniko.Voda.DTO.Product;
 import iniko.Voda.Repos.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,5 +50,12 @@ public class ProductService {
         }
         return productsr;
     }
+
+    public Page<Product> findAllProducts(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        Page<Product> pageResult = productRepo.findAll(pageable);
+        return pageResult;
+    }
+
 
 }

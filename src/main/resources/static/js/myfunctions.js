@@ -13,6 +13,7 @@ function addtoCart(productId) {
             console.log("Error adding product to cart: " + error);
         }
     });
+    $("#navbarNav").load(location.href + " #navbarNav");
 }
 
 function removeFromCart(productId) {
@@ -31,6 +32,7 @@ function removeFromCart(productId) {
         }
     });
     $(".table").load(location.href + " .table");
+    $("#navbarNav").load(location.href + " #navbarNav");
 }
 
 function addtoWlist(productId) {
@@ -48,6 +50,7 @@ function addtoWlist(productId) {
             console.log("Error adding product to WishList: " + error);
         }
     });
+    $("#navbarNav").load(location.href + " #navbarNav");
 }
 
 function removetoWlist(productId) {
@@ -66,4 +69,5 @@ function removetoWlist(productId) {
         }
     });
     $(".table").load(location.href + " .table");
+    $("#navbarNav").load(location.href + " #navbarNav");
 }

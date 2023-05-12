@@ -16,6 +16,7 @@ public class CartPage {
         if(session.getAttribute("userlog")== null)
         {
             model.addAttribute("sCardProducts",session.getAttribute("sCardProducts"));
+            model.addAttribute("SCsum",(session.getAttribute("SCsum")==null)?0:session.getAttribute("SCsum"));
         }
         return "cart";
     }

@@ -20,6 +20,10 @@
             <td th:text="${product.getPrice()}"></td>
             <td><button type="button" th:onclick="|removeFromCart('${product.getId()}')|" class="btn btn-secondary btn-sm">remove</button></td>
         </tr>
+        <tr>
+            <td colspan="2" style="text-align: right;">Total:</td>
+            <td th:text="${session.SCsum}">0</td>
+        </tr>
         </tbody>
     </table>
 

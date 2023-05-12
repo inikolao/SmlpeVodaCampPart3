@@ -39,11 +39,15 @@ public class CartControler {
 
         int productId = Integer.parseInt(payload.get("productId").toString());
         Product product = productService.findProductByProd_ID(productId);
+        long total=0;
         if (session.getAttribute("userlog")==null) {
             if (product != null) {
                 shopingCart.add(product);
                // shoppingCardService.CreateShoppingCard(shoppingCard);
+                total=shopingCart.stream().mapToLong(Product::getPrice).sum();
                 session.setAttribute("sCardProducts",shopingCart);
+                session.setAttribute("SCsum",total);
+                session.setAttribute("scprSize",shopingCart.size());
                 return "Product added to cart";
             } else {
                 return "Product not found";
@@ -58,7 +62,7 @@ public class CartControler {
         //ShoppingCard shoppingCard=new ShoppingCard(userService.findByUsername(payload.get("username").toString()));
         int productId = Integer.parseInt(payload.get("productId").toString());
         shopingCart= (List<Product>) session.getAttribute("sCardProducts");
-
+        long total =(long) session.getAttribute("SCsum");
 
         if(session.getAttribute("userlog")== null)
         {
@@ -66,7 +70,10 @@ public class CartControler {
                 List <Product> fx= shopingCart.stream().filter(productsx -> productId==productsx.getId()).collect(Collectors.toList());
 
                 shopingCart.remove(fx.get(0));
+                total=total-fx.get(0).getPrice();
                 session.setAttribute("sCardProducts",shopingCart);
+                session.setAttribute("SCsum",total);
+                session.setAttribute("scprSize",shopingCart.size());
                 return "Product removed to cart";
             } else {
                 return "Product not found";
