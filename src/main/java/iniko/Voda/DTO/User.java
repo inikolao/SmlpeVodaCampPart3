@@ -46,7 +46,7 @@ public class User implements UserDetails {
         Surname = surname;
         Mobile = mobile;
         Orders = orders;
-        isAdmin = isAdmin;
+        this.isAdmin = isAdmin;
         IsActive = isActive;
         LastLogIn = lastLogIn;
         DateCreated = dateCreated;

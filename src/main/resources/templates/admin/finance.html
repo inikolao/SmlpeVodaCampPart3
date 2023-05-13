@@ -3,7 +3,43 @@
 <div th:include="topdown/aheader.html"></div>
 <body>
 <h1>Finance Managment</h1>
-
+<div class="container mt-4">
+    <h1 class="text-center">Purchase Reports</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="date">Select Date:</label>
+                <input type="date" class="form-control" id="date" th:name="date">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="category">Select Category:</label>
+                <select class="form-control" id="category" th:name="category">
+                    <option th:each="category : ${mcategories}"
+                            th:value="${category.getProdC_ID()}"
+                            th:text="${category.getName()}">
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Purchase Date</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody id="purchaseTableBody">
+        <tr>
+            <td colspan="4" class="text-center">No data found</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>

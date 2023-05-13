@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -46,6 +47,14 @@ public class ProductsControler {
         model.addAttribute("products",productService.GetProductsByName(keyword));
         return "search";
     }
+    @RequestMapping("/edit/{id}")
+    public String editProducts(Model model, @PathVariable int id)
+    {
+        model.addAttribute("products",productService.findProductByProd_ID(id));
+        return "search";
+    }
+
+
 
 
 }

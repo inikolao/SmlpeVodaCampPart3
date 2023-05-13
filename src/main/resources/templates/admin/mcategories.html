@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:include="topdown/aheader.html"></div>
+<body>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col">
+            <h3>Product Categories</h3>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="search-addon"><i class="fa fa-search"></i></span>
+                </div>
+                <input type="text" class="form-control" id="searchCategory" placeholder="Search categories">
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category : ${mcategories}">
+                    <td th:text="${category.getName()}"></td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm deleteCategory" data-id="${category.getProdC_ID()}">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pagination">
+                   <!-- <li class="page-item" th:classappend="${categoryPage.first} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI}(page=0)}">First</a></li>
+                    <li class="page-item" th:classappend="${categoryPage.previousPageable.empty} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI}(page=${categoryPage.previousPageable.pageNumber}))}">Previous</a></li>
+                    <li class="page-item" th:classappend="${categoryPage.nextPageable.empty} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI}(page=${categoryPage.nextPageable.pageNumber}))}">Next</a></li>
+                    <li class="page-item" th:classappend="${categoryPage.last} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI(page=${categoryPage.totalPages - 1})}">Last</a></li>-->
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+</div>
+<div th:include="topdown/footer.html"></div>
+</body>
+</html>

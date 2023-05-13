@@ -28,6 +28,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(user == null) {
             throw new UsernameNotFoundException("User Not Found with username: " + username);
         }
+        else
+        {
+            System.out.println("User exists.");
+        }
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (user.getAdmin()) {
