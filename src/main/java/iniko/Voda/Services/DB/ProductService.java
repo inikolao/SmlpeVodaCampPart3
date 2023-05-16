@@ -8,9 +8,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -21,6 +23,38 @@ public class ProductService {
     public void CreateProduct(Product product)
     {
         productRepo.save(product);
+    }
+    @Transactional
+    public void UpdateProduct(Product product)
+    {
+
+        Product pr=productRepo.getProductById(product.getId());
+        product.setDateAdded(pr.getDateAdded());
+        product.setFilesRelated(pr.getFilesRelated());
+        productRepo.save(product);
+
+    }
+    @Transactional
+    public void UpdateProductCat(Product product)
+    {
+
+        Product pr=productRepo.getProductById(product.getId());
+        product.setRating(pr.getRating());
+        product.setPrice(pr.getPrice());
+        product.setName(pr.getName());
+        product.setType(pr.getType());
+        product.setDescription(pr.getDescription());
+        product.setDateAdded(pr.getDateAdded());
+        product.setFilesRelated(pr.getFilesRelated());
+        productRepo.save(product);
+
+    }
+
+    @Transactional
+    public void DeleteProduct(Product product)
+    {
+        productRepo.delete(product);
+
     }
 
     public List<Product> GetAllProducts()

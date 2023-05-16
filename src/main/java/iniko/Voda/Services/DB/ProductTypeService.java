@@ -39,5 +39,10 @@ public class ProductTypeService {
     {
         return productTypeRepo.findById(id).orElseThrow(() -> new EntityNotFoundException("Product Type with "+id+" not found"));
     }
+    public List<ProductType> GetProductTypes() {
+
+        return productTypeRepo.findAll();
+    }
+
 
 }

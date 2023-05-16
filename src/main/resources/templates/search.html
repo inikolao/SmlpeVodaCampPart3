@@ -8,37 +8,37 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center">Edit Product</h1>
-    <form th:action="@{/products/update}" method="post" enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}" />
+    <form th:action="@{/page/update}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{products.id}" />
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}" />
+            <input type="text" class="form-control" id="name" th:field="*{products.name}" />
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" th:field="*{description}"></textarea>
+            <textarea class="form-control" id="description" th:field="*{products.description}"></textarea>
         </div>
         <div class="form-group">
             <label for="price">Price:</label>
-            <input type="number" class="form-control" id="price" th:field="*{price}" />
+            <input type="number" class="form-control" id="price" th:field="*{products.price}" />
         </div>
         <div class="form-group">
             <label for="category">Category:</label>
-            <select class="form-control" id="category" th:field="*{category}">
+            <select class="form-control" id="category" th:field="*{products.category}">
                 <option value="">Select a category</option>
-                <option th:each="category : ${categories}" th:value="${category}" th:text="${category.name}"></option>
+                <option th:each="category : ${categories}" th:value="${category.getProdC_ID()}" th:text="${category.name}"></option>
             </select>
         </div>
         <div class="form-group">
             <label for="type">Type:</label>
-            <select class="form-control" id="type" th:field="*{type}">
+            <select class="form-control" id="type" th:field="*{products.type}">
                 <option value="">Select a type</option>
-                <option th:each="type : ${types}" th:value="${type}" th:text="${type.name}"></option>
+                <option th:each="type : ${types}" th:value="${type.getPrdTp_ID()}" th:text="${type.getType()}"></option>
             </select>
         </div>
         <div class="form-group">
             <label for="rating">Rating:</label>
-            <input type="number" class="form-control" id="rating" th:field="*{rating}" />
+            <input type="number" class="form-control" id="rating" th:field="*{products.rating}" />
         </div>
         <div class="form-group">
             <label for="files">Files:</label>

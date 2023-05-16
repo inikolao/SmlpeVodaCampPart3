@@ -79,6 +79,7 @@ public class BasicInitialize {
         FileType fileType;
         for (int i = 0; i < Num; i++) {
             fileType=new FileType(i,GenRandomString());
+           // fileType=new FileType(i,"item-"+i+".jpg");
             fileTypeService.CreateFileType(fileType);
         }
     }
@@ -86,7 +87,8 @@ public class BasicInitialize {
     {
         File file;
         for (int i = 1; i < Num; i++) {
-            file=new File(i,GenRandomString(),GenRandomString(),GetNow(),fileTypeService.GetFileTypeByID(GenRandomInt()+1));
+            file=new File(i,GenRandomString(),"../data/images/item-"+i+".jpg",GetNow(),fileTypeService.GetFileTypeByID(GenRandomInt()+1));
+            //file=new File(i,GenRandomString(),GenRandomString(),GetNow(),fileTypeService.GetFileTypeByID(GenRandomInt()+1));
             fileService.CreateFile(file);
         }
     }

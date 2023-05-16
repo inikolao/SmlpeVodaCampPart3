@@ -4,7 +4,7 @@
 <body>
 <div class="container">
   <h2>Manage Products</h2>
-  <form class="form-inline" th:action="@{/mproducts}" method="get">
+  <form class="form-inline" th:action="@{/search/aname}" method="post">
     <div class="form-group mb-2">
       <label for="search" class="sr-only">Search</label>
       <input type="text" class="form-control" id="search" name="search" placeholder="Search">
@@ -33,7 +33,7 @@
       <td th:text="${product.getDescription()}"></td>
       <td th:text="${product.getPrice()}"></td>
       <td>
-        <form th:action="@{/mproducts/category}" method="post">
+        <form th:action="@{/page/updateCat}" method="post">
           <input type="hidden" th:name="id" th:value="${product.id}">
           <select class="form-control" name="category">
             <option th:each="category : ${mcategories}"
@@ -49,8 +49,8 @@
       <td th:text="${product.getDateAdded()}"></td>
       <td>
         <div class="btn-group" role="group" aria-label="Actions">
-          <a th:href="@{/products/edit/{id}(id=${product.getId()})}" class="btn btn-primary">Edit</a>
-          <button class="btn btn-danger btn-delete" data-id="${product.getId()}">Delete</button>
+          <a th:href="@{/page/edit/{id}(id=${product.getId()})}" class="btn btn-primary">Edit</a>
+          <a th:href="@{/page/deleteProd/{id}(id=${product.getId()})}" class="btn btn-danger btn-delete" data-id="${product.getId()}">Delete</a>
         </div>
       </td>
     </tr>

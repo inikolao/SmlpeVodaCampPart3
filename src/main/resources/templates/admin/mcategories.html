@@ -6,12 +6,15 @@
     <div class="row">
         <div class="col">
             <h3>Product Categories</h3>
+            <form class="form-inline" th:action="@{/search/cname}" method="post">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="search-addon"><i class="fa fa-search"></i></span>
                 </div>
-                <input type="text" class="form-control" id="searchCategory" placeholder="Search categories">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Search categories">
             </div>
+                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </form>
             <table class="table">
                 <thead>
                 <tr>
@@ -23,7 +26,7 @@
                 <tr th:each="category : ${mcategories}">
                     <td th:text="${category.getName()}"></td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm deleteCategory" data-id="${category.getProdC_ID()}">Delete</button>
+                        <a th:href="@{/ecategory/delete/{id}(id=${category.getProdC_ID()})}" class="btn btn-danger btn-sm deleteCategory" data-id="${category.getProdC_ID()}">Delete</a>
                     </td>
                 </tr>
                 </tbody>

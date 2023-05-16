@@ -6,12 +6,15 @@
   <div class="row">
     <div class="col">
       <h3>User Management</h3>
+      <form class="form-inline" th:action="@{/search/user}" method="post">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="search-addon"><i class="fa fa-search"></i></span>
         </div>
         <input type="text" class="form-control" id="searchUser" placeholder="Search users">
       </div>
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      </form>
       <table class="table">
         <thead>
         <tr>
@@ -31,7 +34,7 @@
           <td th:text="${user.getAdmin()}"></td>
           <td th:text="${user.isEnabled()}"></td>
           <td>
-            <button type="button" class="btn btn-danger btn-sm deleteUser" data-id="${user.getUserId()}">Delete</button>
+            <a th:href="@{/users/delete/{id}(id=${user.getUserID()})}" class="btn btn-danger btn-sm deleteUser" data-id="${user.getUserId()}">Delete</a>
           </td>
         </tr>
         </tbody>

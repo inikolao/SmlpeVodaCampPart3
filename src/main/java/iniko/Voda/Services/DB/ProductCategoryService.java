@@ -1,9 +1,13 @@
 package iniko.Voda.Services.DB;
 
+import iniko.Voda.DTO.Product;
 import iniko.Voda.DTO.ProductCategory;
 import iniko.Voda.Repos.ProductCategoryRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
@@ -39,6 +43,18 @@ public class ProductCategoryService {
     public ProductCategory GetProductCategoryByID(int id)
     {
         return productCategoryRepo.findById(id).orElseThrow(()->new EntityNotFoundException("Product category with "+id+" not found"));
+    }
+    @Transactional
+    public void DeleteCategory(ProductCategory category)
+    {
+        productCategoryRepo.delete(category);
+
+    }
+
+    public List<ProductCategory> getProductGategoryByName(String name,int pageNumber)
+    {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 9);
+        return productCategoryRepo.findProductCategoryByNameContainingIgnoreCase(name,pageable).getContent();
     }
 
 }

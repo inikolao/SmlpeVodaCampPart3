@@ -17,4 +17,6 @@ public interface UserRepo extends JpaRepository<User,Long> {
     User findByIsAdminTrue();
 
     Page<User> findAllByUsernameContainingIgnoreCase(String username, Pageable pageable);
+
+    User findByUserID(int id);
 }

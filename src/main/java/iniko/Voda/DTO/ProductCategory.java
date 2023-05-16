@@ -10,7 +10,7 @@ public class ProductCategory {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int ProdC_ID;
-    private String Name;
+    private String name;
     private Date Date_created;
 
     public ProductCategory() {
@@ -18,7 +18,7 @@ public class ProductCategory {
 
     public ProductCategory(int prodC_ID, String name, Date date_created) {
         ProdC_ID = prodC_ID;
-        Name = name;
+        this.name = name;
         Date_created = date_created;
     }
 
@@ -31,11 +31,11 @@ public class ProductCategory {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Date getDate_created() {
@@ -50,7 +50,7 @@ public class ProductCategory {
     public String toString() {
         return "ProductCategory{" +
                 "ProdC_ID=" + ProdC_ID +
-                ", Name='" + Name + '\'' +
+                ", Name='" + name + '\'' +
                 ", Date_created=" + Date_created +
                 '}';
     }
