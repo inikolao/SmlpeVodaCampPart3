@@ -28,7 +28,9 @@ public class UserService{
 
     public Page<User> findByUsernamePages(String username,int pageNumber, int pageSize) {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
-        return userRepo.findAllByUsernameContainingIgnoreCase(username,pageable);
+        //List<User> users=userRepo.findUserByUsernameContainingIgnoreCase(username);
+        //user
+        return userRepo.findUserByUsernameContainingIgnoreCase(username,pageable);
     }
     public User save(User user) {
         return userRepo.save(user);

@@ -1,9 +1,11 @@
 package iniko.Voda.Controlers.Admin;
 
 
+import iniko.Voda.DTO.OrderCategory;
 import iniko.Voda.DTO.Product;
 import iniko.Voda.DTO.User;
 import iniko.Voda.Repos.UserRepo;
+import iniko.Voda.Services.DB.OrderCategoryService;
 import iniko.Voda.Services.DB.ProductCategoryService;
 import iniko.Voda.Services.DB.ProductService;
 import iniko.Voda.Services.DB.UserService;
@@ -29,6 +31,9 @@ public class AdminControler {
 
     @Autowired
     ProductCategoryService productCategoryService;
+    @Autowired
+    OrderCategoryService orderCategoryService;
+
 
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -76,10 +81,11 @@ public class AdminControler {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping("/finance")
-    public String GetFinanceMg(Model model)
+    public String GetFinanceMg(Model model,@RequestParam(defaultValue = "1") int page)
     {
-        model.addAttribute("mproducts",productService.GetAllProducts());
-        model.addAttribute("mcategories",productCategoryService.GetAllProductCategories());
+        model.addAttribute("fcategories",orderCategoryService.getAll());
+        model.addAttribute("totalPages", 2);
+        model.addAttribute("page", page);
         return "admin/finance";
     }
 }

@@ -5,6 +5,7 @@
 <h1>Finance Managment</h1>
 <div class="container mt-4">
     <h1 class="text-center">Purchase Reports</h1>
+    <form th:action="@{/search/findFinance}" method="post">
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
@@ -16,29 +17,55 @@
             <div class="form-group">
                 <label for="category">Select Category:</label>
                 <select class="form-control" id="category" th:name="category">
-                    <option th:each="category : ${mcategories}"
-                            th:value="${category.getProdC_ID()}"
+                    <option th:each="category : ${fcategories}"
+                            th:value="${category.getOrderCTID()}"
                             th:text="${category.getName()}">
                     </option>
                 </select>
             </div>
         </div>
     </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
     <table class="table mt-4">
         <thead>
         <tr>
-            <th>Product Name</th>
+            <th>Order ID</th>
             <th>Category</th>
             <th>Purchase Date</th>
-            <th>Price</th>
+            <th>Total</th>
         </tr>
         </thead>
         <tbody id="purchaseTableBody">
+        <tr th:each="order : ${financer}">
+            <td th:text="${order.getOrderCTID()}"></td>
+            <td th:text="${order.getCategory().getName()}"></td>
+            <td th:text="${order.getDateCreated()}"></td>
+            <td th:text="${order.getTotal()}"></td>
+        </tr>
         <tr>
             <td colspan="4" class="text-center">No data found</td>
         </tr>
         </tbody>
     </table>
+    <nav>
+        <ul class="pagination">
+            <!-- <li class="page-item" th:classappend="${categoryPage.first} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI}(page=0)}">First</a></li>
+             <li class="page-item" th:classappend="${categoryPage.previousPageable.empty} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI}(page=${categoryPage.previousPageable.pageNumber}))}">Previous</a></li>
+             <li class="page-item" th:classappend="${categoryPage.nextPageable.empty} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI}(page=${categoryPage.nextPageable.pageNumber}))}">Next</a></li>
+             <li class="page-item" th:classappend="${categoryPage.last} ? disabled"><a class="page-link" th:href="@{${#httpServletRequest.requestURI(page=${categoryPage.totalPages - 1})}">Last</a></li>-->
+            <li th:class="${page == 1} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link"th:href="|@{/admin/finance} ? page=${page - 1}|">Previous</a>
+            </li>
+            <li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}" th:class="${page == pageNumber} ? 'page-item active' : 'page-item'">
+                <a class="page-link" th:href="@{|/admin/finance?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+            </li>
+            <li th:class="${page == totalPages} ? 'page-item disabled' : 'page-item'">
+                <a class="page-link" th:href="@{|/admin/finance?page=${page+1}|}">Next</a>
+            </li>
+
+        </ul>
+    </nav>
 </div>
 
 </body>

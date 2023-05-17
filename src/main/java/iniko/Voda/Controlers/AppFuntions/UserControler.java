@@ -24,13 +24,13 @@ public class UserControler {
         User user=userService.getUserByID(id);
         if (user ==null) {
 
-            return "redirect:admin/user-list";
+            return "redirect:/admin/users";
         }
         else {
 
             userService.deleteUser(user);
         }
 
-        return "redirect:/admin/user-list";
+        return "redirect:/admin/users";
     }
 }

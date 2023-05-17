@@ -26,6 +26,16 @@
         </tr>
         </tbody>
     </table>
+    <form th:action="@{/cart/makeorder}" method="post">
+        <select class="form-control" name="category">
+            <option th:each="category : ${ordcategories}"
+                    th:value="${category.getOrderCTID()}"
+                    th:text="${category.getName()}"
+                    >
+            </option></select>
+            <input type="hidden" th:each="productd:${sCardProductsx}" name="selectedProducts" th:value="${productd.getId()}">
+        <button type="submit" class="btn btn-primary">Purchase</button>
+    </form>
 
 </div>
 <div th:include="topdown/footer.html"></div>

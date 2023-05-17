@@ -1,9 +1,12 @@
 package iniko.Voda.Controlers.AppFuntions;
 
 
+import iniko.Voda.DTO.Order;
 import iniko.Voda.DTO.Product;
 import iniko.Voda.DTO.ProductCategory;
 import iniko.Voda.DTO.User;
+import iniko.Voda.Repos.OrderRepo;
+import iniko.Voda.Services.DB.OrderService;
 import iniko.Voda.Services.DB.ProductCategoryService;
 import iniko.Voda.Services.DB.ProductService;
 import iniko.Voda.Services.DB.UserService;
@@ -17,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -33,6 +34,9 @@ public class SearchControler {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @PostMapping("/name")
     public Map<String, Object> GetSearchByPName(@RequestBody Map<String, Object> payload, HttpSession session, @RequestParam(defaultValue = "1") int page, Model model)
@@ -68,10 +72,20 @@ public class SearchControler {
     @PostMapping("/user")
     public String searchUserByName(@RequestParam("search") String searchTerm, Model model)
     {
-        Page<User> users = userService.findByUsernamePages(searchTerm,3,9);
+        Page<User> users = userService.findByUsernamePages(searchTerm,1,9);
         model.addAttribute("users", users.getContent());
         model.addAttribute("totalPages", users.getTotalPages());
-        model.addAttribute("page", 3);
+        model.addAttribute("page", 1);
         return "admin/user-list";
+    }
+
+    @PostMapping("/findFinance")
+    public String searchFinance(@RequestParam("date") Date searchdate,@RequestParam("category") int searchcategory, Model model)
+    {
+       Page<Order> orders= orderService.SearchOrdersByDateAndCategory(searchcategory,searchdate,1,9);
+        model.addAttribute("financer", orders.getContent());
+        model.addAttribute("totalPages", orders.getTotalPages());
+        model.addAttribute("page", 1);
+        return "admin/finance";
     }
 }

@@ -9,25 +9,25 @@ import java.util.Date;
 public class OrderCategory {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int OrderCT_ID;
+    private int orderCTID;
     private String Name;
     private Date DateCreated;
 
     public OrderCategory() {
     }
 
-    public OrderCategory(int orderCT_ID, String name, Date dateCreated) {
-        OrderCT_ID = orderCT_ID;
+    public OrderCategory(int orderCTID, String name, Date dateCreated) {
+        this.orderCTID = orderCTID;
         Name = name;
         DateCreated = dateCreated;
     }
 
-    public int getOrderCT_ID() {
-        return OrderCT_ID;
+    public int getOrderCTID() {
+        return orderCTID;
     }
 
-    public void setOrderCT_ID(int orderCT_ID) {
-        OrderCT_ID = orderCT_ID;
+    public void setOrderCTID(int orderCTID) {
+        this.orderCTID = orderCTID;
     }
 
     public String getName() {
@@ -49,7 +49,7 @@ public class OrderCategory {
     @Override
     public String toString() {
         return "OrderCategory{" +
-                "OrderCT_ID=" + OrderCT_ID +
+                "OrderCT_ID=" + orderCTID +
                 ", Name='" + Name + '\'' +
                 ", DateCreated=" + DateCreated +
                 '}';

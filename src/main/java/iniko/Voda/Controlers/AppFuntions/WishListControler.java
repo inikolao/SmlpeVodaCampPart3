@@ -114,5 +114,4 @@ public class WishListControler {
         }*/
         return "addToWishlist";
     }
-
 }

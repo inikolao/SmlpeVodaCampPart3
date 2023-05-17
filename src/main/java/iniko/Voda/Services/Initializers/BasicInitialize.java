@@ -120,6 +120,7 @@ public class BasicInitialize {
     {
         createAdmin();
         createMainTest();
+        createGuest();
         User user;
         for (int i = 0; i < 10; i++) {
             user=new User();
@@ -151,6 +152,22 @@ public class BasicInitialize {
         admin.setSurname(GenRandomString());
         admin.setLastLogIn(null);
         userService.CreateUser(admin);
+    }
+
+    private void createGuest()
+    {
+        User guest=new User();
+        guest.setUsername("guest");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        guest.setPassword(passwordEncoder.encode("xxxxxxx"));
+        guest.setAdmin(false);
+        guest.setActive(false);
+        guest.setMobile("012345678910");
+        guest.setDateCreated(GetNow());
+        guest.setName(GenRandomString());
+        guest.setSurname(GenRandomString());
+        guest.setLastLogIn(null);
+        userService.CreateUser(guest);
     }
     private void createMainTest()
     {

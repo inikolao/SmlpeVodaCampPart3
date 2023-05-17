@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface UserRepo extends JpaRepository<User,Long> {
+import java.util.List;
+
+public interface UserRepo extends JpaRepository<User,Integer> {
 
 
 
@@ -17,6 +19,13 @@ public interface UserRepo extends JpaRepository<User,Long> {
     User findByIsAdminTrue();
 
     Page<User> findAllByUsernameContainingIgnoreCase(String username, Pageable pageable);
+
+    Page<User> findUserByUsernameContainingIgnoreCase(String username, Pageable pageable);
+
+    List<User> findUserByUsernameContainingIgnoreCase(String username);
+
+    Page<User> findByUsernameContainingIgnoreCase(String username, Pageable pageable);
+
 
     User findByUserID(int id);
 }

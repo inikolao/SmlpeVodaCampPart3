@@ -17,7 +17,7 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int UserID;
+    private int userID;
 
     @Column(name="Username")
     private String username;
@@ -39,7 +39,7 @@ public class User implements UserDetails {
     }
 
     public User(int userID, String username, String password, String name, String surname, String mobile, List<Order> orders, Boolean isAdmin, Boolean isActive, Date lastLogIn, Date dateCreated) {
-        UserID = userID;
+        this.userID = userID;
         this.username = username;
         Password = password;
         Name = name;
@@ -53,11 +53,11 @@ public class User implements UserDetails {
     }
 
     public int getUserID() {
-        return UserID;
+        return userID;
     }
 
     public void setUserID(int userID) {
-        UserID = userID;
+        this.userID = userID;
     }
 
     public String getUsername() {
@@ -143,7 +143,7 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "UserID=" + UserID +
+                "UserID=" + userID +
                 ", Username='" + username + '\'' +
                 ", Password='" + Password + '\'' +
                 ", Name='" + Name + '\'' +

@@ -1,10 +1,10 @@
 package iniko.Voda.Controlers.AppFuntions;
 
+import iniko.Voda.DTO.Order;
 import iniko.Voda.DTO.Product;
 import iniko.Voda.DTO.ShoppingCard;
-import iniko.Voda.Services.DB.ProductService;
-import iniko.Voda.Services.DB.ShoppingCardService;
-import iniko.Voda.Services.DB.UserService;
+import iniko.Voda.DTO.User;
+import iniko.Voda.Services.DB.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,6 +33,12 @@ public class CartControler {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    OrderService orderService;
+
+    @Autowired
+    OrderCategoryService orderCategoryService;
 
     @PostMapping("/add")
     @ResponseBody
@@ -80,5 +88,28 @@ public class CartControler {
             }
         }
         return "removeFromCard";
+    }
+
+    @PostMapping("/makeorder")
+    public String makeorder (@RequestBody List<Integer> selectedProducts,@RequestBody int category,HttpSession session)
+    {
+        String username=(session.getAttribute("username")==null)?"guest": (String) session.getAttribute("username");//username
+        List <Product> products=new ArrayList<>();
+        for (Integer id: selectedProducts
+             ) {
+            products.add(productService.findProductByProd_ID(id));
+        }
+        User user=userService.findByUsername(username);
+        Order order=new Order(1,user,orderCategoryService.getOrderCategoryByID(category),products,products.stream().mapToLong(Product::getPrice).sum(),products.size(),GetNow());
+        orderService.CreateOrder(order);
+        return  "redirect:/payments";
+    }
+
+
+    private Date GetNow()
+    {
+        Date dateOne = new Date();
+        Instant inst = Instant.now();
+        return dateOne.from(inst);
     }
 }

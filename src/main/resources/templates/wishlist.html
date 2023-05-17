@@ -18,7 +18,8 @@
       <td th:text="${product.getName()}"></td>
       <td th:text="${product.getDescription()}"></td>
       <td th:text="${product.getPrice()}"></td>
-      <td><button type="button" th:onclick="|removetoWlist('${product.getId()}')|" class="btn btn-secondary btn-sm">remove</button></td>
+      <td><button type="button" th:onclick="|removetoWlist('${product.getId()}')|" class="btn btn-secondary btn-sm">remove</button>
+        <button type="button" th:onclick="|addtoCart('${product.getId()}')|" class="btn btn-sm btn-outline-secondary">Add to Cart</button></td>
     </tr>
     <tr>
       <td colspan="2" style="text-align: right;">Total:</td>
@@ -26,7 +27,6 @@
     </tr>
     </tbody>
   </table>
-
 </div>
 <div th:include="topdown/footer.html"></div>
 </body>

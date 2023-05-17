@@ -13,39 +13,39 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int OrderID;
+    private int orderID;
     @OneToOne
     @Cascade(CascadeType.DELETE)
     private User UserCreated;
     @OneToOne
     @Cascade(CascadeType.DELETE)
-    private OrderCategory Category;
+    private OrderCategory category;
     @OneToMany
     @Cascade(CascadeType.DELETE)
     private List<Product> Products;
-    private long Total;
+    private long total;
     private int NumProducts;
-    private Date DateCreated;
+    private Date dateCreated;
 
     public Order() {
     }
 
     public Order(int orderID, User userCreated, OrderCategory category, List<Product> products, long total, int numProducts, Date dateCreated) {
-        OrderID = orderID;
+        this.orderID = orderID;
         UserCreated = userCreated;
-        Category = category;
+        this.category = category;
         Products = products;
-        Total = total;
+        this.total = total;
         NumProducts =Products.size();
-        DateCreated = dateCreated;
+        this.dateCreated = dateCreated;
     }
 
     public int getOrderID() {
-        return OrderID;
+        return orderID;
     }
 
     public void setOrderID(int orderID) {
-        OrderID = orderID;
+        this.orderID = orderID;
     }
 
     public User getUserCreated() {
@@ -57,11 +57,11 @@ public class Order {
     }
 
     public OrderCategory getCategory() {
-        return Category;
+        return category;
     }
 
     public void setCategory(OrderCategory category) {
-        Category = category;
+        this.category = category;
     }
 
     public List<Product> getProducts() {
@@ -73,11 +73,11 @@ public class Order {
     }
 
     public long getTotal() {
-        return Total;
+        return total;
     }
 
     public void setTotal(long total) {
-        Total = total;
+        this.total = total;
     }
 
     public int getNumProducts() {
@@ -93,23 +93,23 @@ public class Order {
     }
 
     public Date getDateCreated() {
-        return DateCreated;
+        return dateCreated;
     }
 
     public void setDateCreated(Date dateCreated) {
-        DateCreated = dateCreated;
+        this.dateCreated = dateCreated;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "OrderID=" + OrderID +
+                "OrderID=" + orderID +
                 ", UserCreated=" + UserCreated +
-                ", Category=" + Category +
+                ", Category=" + category +
                 ", Products=" + Products +
-                ", Total=" + Total +
+                ", Total=" + total +
                 ", NumProducts=" + NumProducts +
-                ", DateCreated=" + DateCreated +
+                ", DateCreated=" + dateCreated +
                 '}';
     }
 }
