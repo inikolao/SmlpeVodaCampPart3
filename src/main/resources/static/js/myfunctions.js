@@ -93,4 +93,20 @@ function getmyprods() {
             }
         });
     }
+function togglePaymentFields() {
+        var paymentType = document.getElementById("paymentType").value;
+        var cardFields = document.getElementById("cardFields");
+        var expirationFields = document.getElementById("expirationFields");
+        var cvvFields = document.getElementById("cvvFields");
+
+        if (paymentType === "Cash" || paymentType === "Delivery") {
+            cardFields.style.display = "none";
+            expirationFields.style.display = "none";
+            cvvFields.style.display = "none";
+        } else {
+            cardFields.style.display = "block";
+            expirationFields.style.display = "block";
+            cvvFields.style.display = "block";
+        }
+    }
 }

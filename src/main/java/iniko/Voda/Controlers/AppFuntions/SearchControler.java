@@ -12,6 +12,7 @@ import iniko.Voda.Services.DB.ProductService;
 import iniko.Voda.Services.DB.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -80,9 +85,16 @@ public class SearchControler {
     }
 
     @PostMapping("/findFinance")
-    public String searchFinance(@RequestParam("date") Date searchdate,@RequestParam("category") int searchcategory, Model model)
-    {
-       Page<Order> orders= orderService.SearchOrdersByDateAndCategory(searchcategory,searchdate,1,9);
+    public String searchFinance(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-mm-dd") String searchdates, @RequestParam("category") int searchcategory, Model model) throws ParseException {
+        LocalDate localDate;
+
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        localDate = LocalDate.parse(searchdates, formatter);
+
+       // localDate=dateTimeFormatter.format(searchdates);
+       Page<Order> orders= orderService.SearchOrdersByDateAndCategory(searchcategory,localDate,1,9);
         model.addAttribute("financer", orders.getContent());
         model.addAttribute("totalPages", orders.getTotalPages());
         model.addAttribute("page", 1);

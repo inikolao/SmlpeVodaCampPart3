@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Service
@@ -21,9 +23,12 @@ public class OrderService {
         orderRepo.save(order);
     }
 
-    public Page<Order> SearchOrdersByDateAndCategory(int searchcatID, Date dateCr, int pageNumber, int pageSize)
+    public Page<Order> SearchOrdersByDateAndCategory(int searchcatID, LocalDate dateCr, int pageNumber, int pageSize)
     {
         Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
-        return orderRepo.findOrderByCategoryOrderCTIDAndDateCreated(searchcatID,dateCr,pageable);
+       // Date date = Date.from(dateCr.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date date=java.sql.Date.valueOf(dateCr);
+
+        return orderRepo.findOrderByCategoryOrderCTIDAndDateCreated(searchcatID,date,pageable);
     }
 }

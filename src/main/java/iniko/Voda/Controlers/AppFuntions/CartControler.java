@@ -7,13 +7,11 @@ import iniko.Voda.DTO.User;
 import iniko.Voda.Services.DB.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -91,7 +89,7 @@ public class CartControler {
     }
 
     @PostMapping("/makeorder")
-    public String makeorder (@RequestBody List<Integer> selectedProducts,@RequestBody int category,HttpSession session)
+    public String makeorder (@RequestParam("selectedProducts") List<Integer> selectedProducts, @RequestParam("category") int category, HttpSession session)
     {
         String username=(session.getAttribute("username")==null)?"guest": (String) session.getAttribute("username");//username
         List <Product> products=new ArrayList<>();
@@ -102,6 +100,7 @@ public class CartControler {
         User user=userService.findByUsername(username);
         Order order=new Order(1,user,orderCategoryService.getOrderCategoryByID(category),products,products.stream().mapToLong(Product::getPrice).sum(),products.size(),GetNow());
         orderService.CreateOrder(order);
+        session.setAttribute("total",products.stream().mapToLong(Product::getPrice).sum());
         return  "redirect:/payments";
     }
 
@@ -109,6 +108,7 @@ public class CartControler {
     private Date GetNow()
     {
         Date dateOne = new Date();
+        //SimpleDateFormat DateFor = new SimpleDateFormat("yyyy-mm-dd");
         Instant inst = Instant.now();
         return dateOne.from(inst);
     }
