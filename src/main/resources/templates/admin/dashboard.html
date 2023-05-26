@@ -6,7 +6,12 @@
 <p>Only users with the role "ADMIN" can access this page.</p>
 <div class="container">
     <h1>Change Password</h1>
-    <form id="change-password-form">
+    <div id="message-container" style="margin-top: 20px;">
+        <div th:unless="${chMsg=='Enter changes.' or chMsg=='Changes was successful.'}" class="alert alert-danger" role="alert" th:text="${chMsg}"></div>
+        <div th:if="${chMsg=='Enter changes.'}" class="alert alert-success" role="alert" th:text="${chMsg}"></div>
+        <div th:if="${chMsg=='Changes was successful.'}"  class="alert alert-success" role="alert" th:text="${chMsg}"></div>
+    </div>
+    <form id="change-password-form" method="post" th:action="@{/admin/changePass}">
         <div class="form-group">
             <label for="current-password">Current Password</label>
             <input type="password" class="form-control" id="current-password" name="current-password" required>

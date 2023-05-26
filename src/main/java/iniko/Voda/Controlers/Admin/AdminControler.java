@@ -12,12 +12,14 @@ import iniko.Voda.Services.DB.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -38,7 +40,9 @@ public class AdminControler {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/dashboard")
-    public String admin(Model model) {
+    public String admin(Model model)
+    {
+        model.addAttribute("chMsg","Enter changes.");
         return "/admin/dashboard";
     }
 
@@ -88,4 +92,46 @@ public class AdminControler {
         model.addAttribute("page", page);
         return "admin/finance";
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @RequestMapping("/changePass")
+    public String ChangePassMg(Model model, @RequestParam("current-password") String cpass, @RequestParam("new-password") String npass, @RequestParam("confirm-password") String cnpass, HttpSession session)
+    {
+        String msg="";
+        if(!npass.equals(cnpass))
+        {
+            msg="Please confirm pass again.";
+            model.addAttribute("chMsg",msg);
+            return "admin/dashboard";
+        }
+        else
+        {
+            User user=userService.findByUsername((String) session.getAttribute("username"));
+
+            BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+            if(passwordEncoder.matches(cpass,user.getPassword()))
+            {
+                user.setPassword(encryptPass(npass));
+                userService.save(user);
+                msg="Changes was successful.";
+                model.addAttribute("chMsg",msg);
+            }
+            else
+            {
+                msg="Old password is wrong.";
+                model.addAttribute("chMsg",msg);
+                return "admin/dashboard";
+            }
+
+        }
+
+        return "admin/dashboard";
+    }
+
+    private  String encryptPass(String pass)
+    {
+        BCryptPasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+        return passwordEncoder.encode(pass);
+    }
+
 }
